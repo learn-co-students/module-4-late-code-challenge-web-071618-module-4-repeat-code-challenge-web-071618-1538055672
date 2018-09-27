@@ -11,15 +11,27 @@ class CourseContainer extends Component {
     courses: []
   }
 
+componentDidMount(){
+fetch('https://bayside-high.herokuapp.com/api/v1/users/139/courses').then(res => res.json()).then(courses =>
+  this.setState({courses})
+)}
+
+showTitle = (data) =>{
+let x = document.getElementById(data)
+console.log(x)
+}
+
+
   render() {
+console.log(this.state.courses)
     return (
       <div className="ui grid container">
         <div className="ui center aligned header sixteen wide column">
-          {/* Course Title Here */}
+          {this.showTitle}
           Course Title
         </div>
 
-        <CourseSelector />
+        <CourseSelector courseNames={this.state.courses} showTitle={this.showTitle}/>
 
         <EditStudent />
 
